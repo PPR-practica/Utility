@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Utility.Text_Operations;
 
 namespace Utility
 {
@@ -22,7 +23,12 @@ namespace Utility
     {
         public MainWindow()
         {
+            //string input = "Igor;Ivan;Albert;Sofia;Mary;Salmonela;Igor;Igor";
+
+            //List<string> output = TextOperations.SplitAndUniquify(input, ";");
+
             InitializeComponent();
+            
         }
     }
 }
