@@ -23,6 +23,7 @@ namespace Utility
         public MainWindow()
         {
             InitializeComponent();
+            Console.WriteLine("ceva");
         }
     }
 }
