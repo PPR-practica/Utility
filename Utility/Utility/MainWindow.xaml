@@ -16,6 +16,10 @@
                 <DropShadowEffect ShadowDepth="40" Direction="325" Color="#FF9B5858"/>
             </Button.Effect>
         </Button>
+        <!--
+        TODO: 18.08.2016
+        AGAIN naming convention
+        -->
         <TextBox x:Name="textBox1" Height="109" Margin="169,45,168,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" Background="#FF971313" Foreground="#FFF7F0F0" Text="aleluia" FontFamily="MV Boli" FontSize="20" RenderTransformOrigin="0.5,0.5">
             <TextBox.RenderTransform>
                 <TransformGroup>
