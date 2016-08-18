@@ -17,20 +17,16 @@ namespace Utility.Text_Operations
             //AS ALLWAYS, nu ma intere ce folositi, HASET, LIST, LINQ sau ce mai vreti voi, da pls, inainte de a lucra cu o clasa pe care nu ati mai folosit-o veci, studiati un pic clasa aia.
             //Recomandations: LINQ.Distinct
             //NOTE TO SELF: find a reason to ask IComparable implementation.
-            HashSet<string> uniqueStrings = new HashSet<string>();
+            IEnumerable<string> uniqueStrings = inputStrings.Distinct();
 
-            foreach(string piece in inputStrings)
-            {
-                uniqueStrings.Add(piece);
-            }
             return uniqueStrings.ToList<string>();
         }
-        
-        // TODO: 18.08.2016: de ce nu vine delimitatoru ca si charArray?. 
+
+        // TODO: 18.08.2016: de ce nu vine delimitatoru ca si charArray?.                   <--- rectificat 
         //SRP violation, avem 2 operatiuni aci... mai mult sau mai putin, dar mna...
-        public static List<string> SplitToList(string input, string delimiter)
+        public static List<string> SplitToList(string input, char[] delimiter)
         {
-            return input.Split(delimiter.ToCharArray()).ToList();
+            return input.Split(delimiter).ToList();
         }
     }
 }

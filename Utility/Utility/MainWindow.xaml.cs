@@ -26,6 +26,10 @@ namespace Utility
     /// </summary>
     public partial class MainWindow : Window
     {
+        string fileText;
+        string filePath;
+        List<string> processedText = new List<string>();
+
         public MainWindow()
         {
             //string input = "Igor;Ivan;Albert;Sofia;Mary;Salmonela;Igor;Igor";
@@ -33,22 +37,26 @@ namespace Utility
         }
         //start, run, services.msc, TabletInputService
 
-        //TO DO:18.08.2016 Lene, ce-i ala ofd. Nume d'asta sa.....nu mai vedem
-        OpenFileDialog ofd = new OpenFileDialog();
-        
-        //TO DO:18.08.2016: No, button click? De ce nu button 2 click? de ce nu lable click?. Nume Sugestive pls.
-        private void Button_Click(object sender, RoutedEventArgs e)
+        //TO DO:18.08.2016 Lene, ce-i ala ofd. Nume d'asta sa.....nu mai vedem          <--- rectificat 
+        OpenFileDialog openFileDialog = new OpenFileDialog();
+
+        //TO DO:18.08.2016: No, button click? De ce nu button 2 click? de ce nu lable click?. Nume Sugestive pls.             <--- rectificat  
+        private void openButton_Click(object sender, RoutedEventArgs e)
         {
-            ofd.ShowDialog();
-            Stream fileInputStream = ofd.OpenFile();
+            openFileDialog.ShowDialog();
+            Stream fileInputStream = openFileDialog.OpenFile();
+            
             StreamReader fileReader = new StreamReader(fileInputStream);
-            string fileText = fileReader.ReadToEnd();
-            List<string> processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, ";"));
+            fileText = fileReader.ReadToEnd();
+            processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, ";".ToCharArray()));
                         
             foreach (string line in processedText)
             {
                 textBox1.AppendText(line + "\n");
             }
+            fileInputStream.Dispose();
+            fileReader.Dispose();
+            filePath = openFileDialog.FileName;
             ///  replace this (put lines in a list or something)
         }
                
@@ -56,26 +64,32 @@ namespace Utility
         {
         }
 
-        SaveFileDialog sdf = new SaveFileDialog();       
+        SaveFileDialog saveFileDialog = new SaveFileDialog();       
         
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            bool? dialogResult = sdf.ShowDialog();   // true if user chosen file  - null if cancelled 
+            bool? dialogResult = saveFileDialog.ShowDialog();   // true if user chosen file  - null if cancelled 
+            
             if (dialogResult == true)
             {
-                List<string> processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, ";"));
-                foreach(string line in processedText)
-                //TO DO:18.08.2016 d'unde vine 6 ala??????
-                int n = 6;
+                filePath = saveFileDialog.FileName;
+                File.WriteAllLines(filePath, processedText.ToArray());
+
+                //TO DO:18.08.2016 d'unde vine 6 ala??????                  <--- rectificat 
+                // ^ (maxim 6) o venit din void o plecat in void 
             }
             else
             {
-                Stream fileInputStream = ofd.OpenFile();
+                /*
+                Stream fileInputStream = openFileDialog.OpenFile();
                 StreamReader fileReader = new StreamReader(fileInputStream);
                 string fileText = fileReader.ReadToEnd();
                 if (File.Exists(fileText))
                     File.Delete(fileText);
                 FileStream fs = File.Create(fileText);
+                */
+
+                File.WriteAllLines(filePath, processedText);
             }
         }
     }
