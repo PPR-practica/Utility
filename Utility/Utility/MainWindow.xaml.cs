@@ -32,8 +32,11 @@ namespace Utility
             //InitializeComponent();            
         }
         //start, run, services.msc, TabletInputService
+
+        //TO DO:18.08.2016 Lene, ce-i ala ofd. Nume d'asta sa.....nu mai vedem
         OpenFileDialog ofd = new OpenFileDialog();
-       
+        
+        //TO DO:18.08.2016: No, button click? De ce nu button 2 click? de ce nu lable click?. Nume Sugestive pls.
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ofd.ShowDialog();
@@ -62,9 +65,8 @@ namespace Utility
             {
                 List<string> processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, ";"));
                 foreach(string line in processedText)
-                {
-
-                }
+                //TO DO:18.08.2016 d'unde vine 6 ala??????
+                int n = 6;
             }
             else
             {
