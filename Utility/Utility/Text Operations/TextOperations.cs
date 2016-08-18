@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace Utility.Text_Operations
 {
-    public class TextOperations
+    public static class TextOperations
     {
-        public static List<string> SplitAndUniquify(string inputString, string delimiter)
+        public static List<string> Uniquify(List<string> inputStrings)
         {
-            //List<string> uniqueStrings = new List<string>();
             HashSet<string> uniqueStrings = new HashSet<string>();
 
-            string[] splittedInput = inputString.Split(delimiter.ToCharArray());
-
-            foreach(string piece in splittedInput)
+            foreach(string piece in inputStrings)
             {
                 uniqueStrings.Add(piece);
             }
             return uniqueStrings.ToList<string>();
+        }
+
+        public static List<string> SplitToList(string input, string delimiter)
+        {
+            return input.Split(delimiter.ToCharArray()).ToList();
         }
     }
 }
