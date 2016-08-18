@@ -29,7 +29,7 @@
                 <DropShadowEffect ShadowDepth="40" Color="#FF9B5858"/>
             </TextBox.Effect>
         </TextBox>
-        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="228,205,0,0" VerticalAlignment="Top" Width="100" Height="100" Background="#FF971313" FontFamily="MV Boli" RenderTransformOrigin="0.5,0.5" Foreground="White">
+        <Button x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="228,205,0,0" VerticalAlignment="Top" Width="100" Height="100" Background="#FF971313" FontFamily="MV Boli" RenderTransformOrigin="0.5,0.5" Foreground="White" Click="Save_Click">
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

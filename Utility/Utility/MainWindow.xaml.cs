@@ -41,10 +41,13 @@ namespace Utility
             StreamReader fileReader = new StreamReader(fileInputStream);
             string fileText = fileReader.ReadToEnd();
             List<string> processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, ";"));
-            foreach(string line in processedText)
+
+            /////////////////////////////////////////
+            foreach (string line in processedText)
             {
                 textBox1.AppendText(line + "\n");
             }
+            ///  replace this (put lines in a list or something)
 
         }
 
@@ -52,6 +55,22 @@ namespace Utility
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+        }
+
+        SaveFileDialog sdf = new SaveFileDialog();
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            bool? dialogResult = sdf.ShowDialog();   // true if user chosen file  - null if cancelled 
+            if (dialogResult == true)
+            {
+                // ii ok
+                int n = 6;
+            }
+            else
+            {
+                //o dat cancel 
+            }
         }
     }
 }
