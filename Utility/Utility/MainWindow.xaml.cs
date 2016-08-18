@@ -32,7 +32,11 @@ namespace Utility
             //InitializeComponent();            
         }
 
+
+        //TO DO:18.08.2016 Lene, ce-i ala ofd. Nume d'asta sa.....nu mai vedem
         OpenFileDialog ofd = new OpenFileDialog();
+        
+        //TO DO:18.08.2016: No, button click? De ce nu button 2 click? de ce nu lable click?. Nume Sugestive pls.
         /// <summary>
         /// 
         /// </summary>
@@ -77,6 +81,7 @@ namespace Utility
             if (dialogResult == true)
             {
                 // ii ok
+                //TO DO:18.08.2016 d'unde vine 6 ala??????
                 int n = 6;
             }
             else
