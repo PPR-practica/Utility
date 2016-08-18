@@ -31,13 +31,9 @@ namespace Utility
             //string input = "Igor;Ivan;Albert;Sofia;Mary;Salmonela;Igor;Igor";
             //InitializeComponent();            
         }
-
+        //start, run, services.msc, TabletInputService
         OpenFileDialog ofd = new OpenFileDialog();
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+       
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ofd.ShowDialog();
@@ -45,43 +41,39 @@ namespace Utility
             StreamReader fileReader = new StreamReader(fileInputStream);
             string fileText = fileReader.ReadToEnd();
             List<string> processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, ";"));
-
-            /////////////////////////////////////////
+                        
             foreach (string line in processedText)
             {
                 textBox1.AppendText(line + "\n");
             }
             ///  replace this (put lines in a list or something)
-
         }
-
-        //start, run, services.msc, TabletInputService
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+               
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
         }
 
-        SaveFileDialog sdf = new SaveFileDialog();
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        SaveFileDialog sdf = new SaveFileDialog();       
+        
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             bool? dialogResult = sdf.ShowDialog();   // true if user chosen file  - null if cancelled 
             if (dialogResult == true)
             {
-                // ii ok
-                int n = 6;
+                List<string> processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, ";"));
+                foreach(string line in processedText)
+                {
+
+                }
             }
             else
             {
-                //o dat cancel 
+                Stream fileInputStream = ofd.OpenFile();
+                StreamReader fileReader = new StreamReader(fileInputStream);
+                string fileText = fileReader.ReadToEnd();
+                if (File.Exists(fileText))
+                    File.Delete(fileText);
+                FileStream fs = File.Create(fileText);
             }
         }
     }
