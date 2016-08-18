@@ -29,7 +29,6 @@ namespace Utility
         public MainWindow()
         {
             //string input = "Igor;Ivan;Albert;Sofia;Mary;Salmonela;Igor;Igor";
-            //List<string> output = TextOperations.SplitAndUniquify(input, ";");
             //InitializeComponent();            
         }
 
@@ -38,6 +37,14 @@ namespace Utility
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ofd.ShowDialog();
+            Stream fileInputStream = ofd.OpenFile();
+            StreamReader fileReader = new StreamReader(fileInputStream);
+            string fileText = fileReader.ReadToEnd();
+            List<string> processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, ";"));
+            foreach(string line in processedText)
+            {
+                textBox1.AppendText(line + "\n");
+            }
 
         }
 
