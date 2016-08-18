@@ -8,6 +8,11 @@ namespace Utility.Text_Operations
 {
     public static class TextOperations
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="inputStrings"></param>
+        /// <returns></returns>
         public static List<string> Uniquify(List<string> inputStrings)
         {
             HashSet<string> uniqueStrings = new HashSet<string>();
@@ -18,7 +23,12 @@ namespace Utility.Text_Operations
             }
             return uniqueStrings.ToList<string>();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <param name="delimiter"></param>
+        /// <returns></returns>
         public static List<string> SplitToList(string input, string delimiter)
         {
             return input.Split(delimiter.ToCharArray()).ToList();
