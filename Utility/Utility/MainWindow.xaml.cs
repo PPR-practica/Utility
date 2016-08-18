@@ -33,7 +33,11 @@ namespace Utility
         }
 
         OpenFileDialog ofd = new OpenFileDialog();
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ofd.ShowDialog();
@@ -52,13 +56,21 @@ namespace Utility
         }
 
         //start, run, services.msc, TabletInputService
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
         }
 
         SaveFileDialog sdf = new SaveFileDialog();
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             bool? dialogResult = sdf.ShowDialog();   // true if user chosen file  - null if cancelled 
