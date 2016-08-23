@@ -56,6 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="File Operations\FileOperations.cs" />
+    <Compile Include="File Operations\FileReader.cs" />
+    <Compile Include="File Operations\FileWriter.cs" />
     <Compile Include="Text Operations\TextOperations.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

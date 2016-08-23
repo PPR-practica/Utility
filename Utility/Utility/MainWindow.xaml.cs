@@ -1,23 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.IO;
-using Microsoft.Win32;
 using Utility.Text_Operations;
+using Utility.File_Operations;
 
 namespace Utility
 {
@@ -28,69 +14,60 @@ namespace Utility
     {
         string fileText;
         string filePath;
+        string[] inputFiles;
         List<string> processedText = new List<string>();
 
         public MainWindow()
         {
-            //string input = "Igor;Ivan;Albert;Sofia;Mary;Salmonela;Igor;Igor";
-            //InitializeComponent();            
         }
         //start, run, services.msc, TabletInputService
 
-        //TO DO:18.08.2016 Lene, ce-i ala ofd. Nume d'asta sa.....nu mai vedem          <--- rectificat 
-        OpenFileDialog openFileDialog = new OpenFileDialog();
-
-        //TO DO:18.08.2016: No, button click? De ce nu button 2 click? de ce nu lable click?. Nume Sugestive pls.             <--- rectificat  
         private void openButton_Click(object sender, RoutedEventArgs e)
         {
-            openFileDialog.ShowDialog();
-            Stream fileInputStream = openFileDialog.OpenFile();
-            
-            StreamReader fileReader = new StreamReader(fileInputStream);
-            fileText = fileReader.ReadToEnd();
-            processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, ";".ToCharArray()));
-                        
-            foreach (string line in processedText)
+            filePath = FileOperations.GetFilePath();
+            try
             {
-                textBox1.AppendText(line + "\n");
+                fileText = FileReader.ReadFile(filePath);
+                saveButton.IsEnabled = true;
             }
-            fileInputStream.Dispose();
-            fileReader.Dispose();
-            filePath = openFileDialog.FileName;
-            ///  replace this (put lines in a list or something)
+            catch(Exception exception)
+            {
+                // user clicked cancel --->> do nothing
+            }
         }
-               
+
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
         }
 
-        SaveFileDialog saveFileDialog = new SaveFileDialog();       
-        
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            bool? dialogResult = saveFileDialog.ShowDialog();   // true if user chosen file  - null if cancelled 
-            
-            if (dialogResult == true)
+            if(textBox1.Text == "")
             {
-                filePath = saveFileDialog.FileName;
-                File.WriteAllLines(filePath, processedText.ToArray());
-
-                //TO DO:18.08.2016 d'unde vine 6 ala??????                  <--- rectificat 
-                // ^ (maxim 6) o venit din void o plecat in void 
+                MessageBox.Show("Please input delimiter!", "Error", MessageBoxButton.OK);
             }
             else
             {
-                /*
-                Stream fileInputStream = openFileDialog.OpenFile();
-                StreamReader fileReader = new StreamReader(fileInputStream);
-                string fileText = fileReader.ReadToEnd();
-                if (File.Exists(fileText))
-                    File.Delete(fileText);
-                FileStream fs = File.Create(fileText);
-                */
-
-                File.WriteAllLines(filePath, processedText);
+                processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, textBox1.Text.ToCharArray()));
+                FileWriter.SaveToFile(filePath, textBox1.Text, processedText);
             }
+            
+        }
+
+        private void chooseFilesButton_Click(object sender, RoutedEventArgs e)
+        {
+            inputFiles = FileOperations.PickFiles();
+            List<string> allText = FileReader.ReadFiles(inputFiles);
+            foreach(string file in inputFiles)
+            {
+                textBox.AppendText(file + "\r\n");
+            }
+        }
+
+        private void mergeToButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileOperations.MergeFiles(inputFiles);
+            textBox.Clear();
         }
     }
 }
