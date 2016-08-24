@@ -54,9 +54,11 @@
             <TabItem Header="Files">
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="chooseFilesButton" Content="Choose files" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="chooseFilesButton_Click"/>
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="255" Margin="113,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="286"/>
+                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="265" Margin="10,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="543" IsEnabled="False"/>
                     <Button x:Name="mergeToButton" Content="Merge to" HorizontalAlignment="Left" Margin="10,37,0,0" VerticalAlignment="Top" Width="75" Click="mergeToButton_Click"/>
-                    <Button x:Name="splitButton" Content="Split" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button x:Name="splitButton" Content="Split" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="75" Click="splitButton_Click"/>
+                    <TextBox x:Name="linesNumberTextBox" HorizontalAlignment="Left" Height="23" Margin="90,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" ToolTip="Number of lines "/>
+                    <Label x:Name="linesLabel" Content="lines" HorizontalAlignment="Left" Margin="170,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-3.846"/>
                 </Grid>
             </TabItem>
         </TabControl>

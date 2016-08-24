@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.IO;
+using Utility.File_Operations;
 
 namespace Utility.Text_Operations
 {
@@ -52,6 +53,51 @@ namespace Utility.Text_Operations
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Split the file to multiple files(by lines number)
+        /// </summary>
+        /// <param name="inputFile"></param>
+        /// <param name="lines"></param>
+        public static void Split(string inputFile, int lines)
+        {
+            int fileNumber = 1;
+            int processedLines = 0;
+            string filePath = Path.GetPathRoot(inputFile);
+            string outputFileName = Path.GetFileNameWithoutExtension(inputFile);
+            string extension = Path.GetExtension(inputFile);
+            string directory = Path.GetDirectoryName(inputFile);
+            string fileText = FileReader.ReadFile(inputFile);
+            string outputFile = directory + "\\" + outputFileName + fileNumber + extension;
+            string currentLine = "";
+            StreamWriter fileWriter;
+            StreamReader fileReader = new StreamReader(inputFile);
+
+            File.Create(outputFile).Dispose();
+
+            fileWriter = new StreamWriter(outputFile);
+            fileWriter.AutoFlush = true;
+            while ((currentLine = fileReader.ReadLine()) != null)
+            {
+                
+                if (processedLines < lines)
+                {
+                    fileWriter.WriteLine(currentLine);
+                    processedLines++;
+                }
+                else
+                {
+                    fileNumber++;
+                    outputFile = directory + "\\" + outputFileName + fileNumber + extension;
+                    File.Create(outputFile).Dispose();
+                    fileWriter = new StreamWriter(outputFile);
+                    processedLines = 0;
+                    fileWriter.WriteLine(currentLine);
+                    processedLines++;
+                }
+            }
+            fileWriter.Dispose();
         }
     }
 }

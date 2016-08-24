@@ -56,6 +56,7 @@ namespace Utility
 
         private void chooseFilesButton_Click(object sender, RoutedEventArgs e)
         {
+            textBox.Clear();
             inputFiles = FileOperations.PickFiles();
             List<string> allText = FileReader.ReadFiles(inputFiles);
             foreach(string file in inputFiles)
@@ -68,6 +69,29 @@ namespace Utility
         {
             FileOperations.MergeFiles(inputFiles);
             textBox.Clear();
+        }
+
+        private void splitButton_Click(object sender, RoutedEventArgs e)
+        {
+            int outNumber;
+            if(inputFiles.Length == 0)
+            {
+                MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
+            }
+            else
+            {
+                if (int.TryParse(linesNumberTextBox.Text, out outNumber))
+                {
+                    foreach (string file in inputFiles)
+                    {
+                        FileOperations.Split(file, int.Parse(linesNumberTextBox.Text));
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please input number of lines!", "Error", MessageBoxButton.OK);
+                }
+            }
         }
     }
 }
