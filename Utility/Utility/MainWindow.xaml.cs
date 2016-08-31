@@ -6,10 +6,7 @@ using Utility.Text_Operations;
 using Utility.File_Operations;
 
 namespace Utility
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+{    
     public partial class MainWindow : Window
     {
         string fileText;
@@ -20,9 +17,8 @@ namespace Utility
         public MainWindow()
         {
         }
-        //start, run, services.msc, TabletInputService
-
-        private void openButton_Click(object sender, RoutedEventArgs e)
+       
+        private void openFileButton_Click(object sender, RoutedEventArgs e)
         {
             filePath = FileOperations.GetFilePath();
             try
@@ -40,35 +36,34 @@ namespace Utility
         {
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private void SaveFileButton_Click(object sender, RoutedEventArgs e)
         {
-            if(textBox1.Text == "")
+            if(separatorTextBox.Text == "")
             {
                 MessageBox.Show("Please input delimiter!", "Error", MessageBoxButton.OK);
             }
             else
             {
-                processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, textBox1.Text.ToCharArray()));
-                FileWriter.SaveToFile(filePath, textBox1.Text, processedText);
-            }
-            
+                processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, separatorTextBox.Text.ToCharArray()));
+                FileWriter.SaveToFile(filePath, separatorTextBox.Text, processedText);
+            }            
         }
 
         private void chooseFilesButton_Click(object sender, RoutedEventArgs e)
         {
-            textBox.Clear();
+            reportTextBox.Clear();
             inputFiles = FileOperations.PickFiles();
             List<string> allText = FileReader.ReadFiles(inputFiles);
             foreach(string file in inputFiles)
             {
-                textBox.AppendText(file + "\r\n");
+                reportTextBox.AppendText(file + "\r\n");
             }
         }
 
         private void mergeToButton_Click(object sender, RoutedEventArgs e)
         {
             FileOperations.MergeFiles(inputFiles);
-            textBox.Clear();
+            reportTextBox.Clear();
         }
 
         private void splitButton_Click(object sender, RoutedEventArgs e)
