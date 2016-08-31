@@ -4,6 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using Utility.Text_Operations;
 using Utility.File_Operations;
+using Utility.File_Operations.TXTOperations;
+using Utility.File_Operations.ExcelOperations;
+using System.IO;
 
 namespace Utility
 {
@@ -20,7 +23,6 @@ namespace Utility
         public MainWindow()
         {
         }
-        //start, run, services.msc, TabletInputService
 
         private void openButton_Click(object sender, RoutedEventArgs e)
         {
@@ -51,7 +53,6 @@ namespace Utility
                 processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, textBox1.Text.ToCharArray()));
                 FileWriter.SaveToFile(filePath, textBox1.Text, processedText);
             }
-            
         }
 
         private void chooseFilesButton_Click(object sender, RoutedEventArgs e)
@@ -61,14 +62,30 @@ namespace Utility
             List<string> allText = FileReader.ReadFiles(inputFiles);
             foreach(string file in inputFiles)
             {
-                textBox.AppendText(file + "\r\n");
+                textBox.AppendText(file + Environment.NewLine);
             }
         }
 
         private void mergeToButton_Click(object sender, RoutedEventArgs e)
         {
-            FileOperations.MergeFiles(inputFiles);
-            textBox.Clear();
+            try
+            {
+                int? fileNumber = inputFiles.Length;
+                if (fileNumber != null)
+                {
+                    FileOperations.MergeFiles(inputFiles);
+                    textBox.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
+            }
+
         }
 
         private void splitButton_Click(object sender, RoutedEventArgs e)
@@ -91,6 +108,40 @@ namespace Utility
                 {
                     MessageBox.Show("Please input number of lines!", "Error", MessageBoxButton.OK);
                 }
+            }
+        }
+
+        private void checkDuplicatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                foreach(string file in inputFiles)
+                {
+                    switch(Path.GetExtension(file))
+                    {
+                        case(".txt"):
+                            {
+                                new TXTDuplicateReport().ExecuteReport(textBox, new string[1] { file });
+                                break;
+                            }
+                        case (".xls"):
+                            {
+                                new ExcelDuplicateReport().ExecuteReport(textBox, new string[1] { file });
+                                break;
+                            }
+                        case (".xlsx"):
+                            {
+                                new ExcelDuplicateReport().ExecuteReport(textBox, new string[1] { file });
+                                break;
+                            }
+
+                    }
+                }
+                /// ^ make delegate???
+            }
+            catch(NullReferenceException exception)
+            {
+                MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
             }
         }
     }

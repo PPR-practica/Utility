@@ -59,6 +59,7 @@
                     <Button x:Name="splitButton" Content="Split" HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="75" Click="splitButton_Click"/>
                     <TextBox x:Name="linesNumberTextBox" HorizontalAlignment="Left" Height="23" Margin="90,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" ToolTip="Number of lines "/>
                     <Label x:Name="linesLabel" Content="lines" HorizontalAlignment="Left" Margin="170,60,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-3.846"/>
+                    <Button x:Name="checkDuplicatesButton" Content="Check Duplicates" HorizontalAlignment="Left" Margin="480,10,0,0" VerticalAlignment="Top" Width="100" ToolTip="Create Duplicare Report" Click="checkDuplicatesButton_Click"/>
                 </Grid>
             </TabItem>
         </TabControl>

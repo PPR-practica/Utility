@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Utility.Text_Operations
@@ -13,7 +14,7 @@ namespace Utility.Text_Operations
 
         public static List<string> SplitToList(string input, char[] delimiter)
         {
-            input = input.Replace("\r\n", "");            //  remove newline to avoid duplicates
+            input = input.Replace(Environment.NewLine, "");            //  remove newline to avoid duplicates
             return input.Split(delimiter).ToList();
         }
 

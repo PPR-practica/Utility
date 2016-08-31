@@ -1,5 +1,8 @@
 ﻿using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Utility.File_Operations;
 
 namespace Utility.Text_Operations
@@ -80,7 +83,7 @@ namespace Utility.Text_Operations
             fileWriter.AutoFlush = true;
             while ((currentLine = fileReader.ReadLine()) != null)
             {
-                
+
                 if (processedLines < lines)
                 {
                     fileWriter.WriteLine(currentLine);

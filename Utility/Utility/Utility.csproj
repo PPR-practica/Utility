@@ -56,9 +56,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="File Operations\ExcelOperations\ExcelDuplicateReport.cs" />
     <Compile Include="File Operations\FileOperations.cs" />
     <Compile Include="File Operations\FileReader.cs" />
     <Compile Include="File Operations\FileWriter.cs" />
+    <Compile Include="File Operations\TXTOperations\TXTDuplicateReport.cs" />
+    <Compile Include="File Operations\XMLOperations\XMLDuplicareReport.cs" />
+    <Compile Include="Interfaces\IDuplicateReport.cs" />
     <Compile Include="Text Operations\TextOperations.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -100,6 +104,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
