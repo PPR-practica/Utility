@@ -83,7 +83,6 @@ namespace Utility.Text_Operations
             fileWriter.AutoFlush = true;
             while ((currentLine = fileReader.ReadLine()) != null)
             {
-
                 if (processedLines < lines)
                 {
                     fileWriter.WriteLine(currentLine);
@@ -95,6 +94,7 @@ namespace Utility.Text_Operations
                     outputFile = directory + "\\" + outputFileName + fileNumber + extension;
                     File.Create(outputFile).Dispose();
                     fileWriter = new StreamWriter(outputFile);
+                    fileWriter.AutoFlush = true;
                     processedLines = 0;
                     fileWriter.WriteLine(currentLine);
                     processedLines++;
