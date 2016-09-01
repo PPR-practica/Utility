@@ -10,9 +10,9 @@
                         <ColumnDefinition Width="422*"/>
                         <ColumnDefinition Width="43*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="saveButton" Content="Save" Margin="0,94,328,0" VerticalAlignment="Top" Height="40" Background="LightGray" FontFamily="MV Boli" RenderTransformOrigin="0.5,0.5" Foreground="Black" Click="SaveFileButton_Click" IsEnabled="False" Width="75" HorizontalAlignment="Right" FontSize="24" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
-                    <Button x:Name="openButton" Content="Open" Margin="24,32,0,0" VerticalAlignment="Top" Width="75" Click="openFileButton_Click" Height="42" Background="#FFDDDDDD" Foreground="#FF040404" FontFamily="MV Boli" RenderTransformOrigin="0,0" HorizontalAlignment="Left" FontSize="24"/>
-                    <TextBox x:Name="separatorTextBox" Height="125" Margin="10,206,55,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" Background="White" Foreground="#FF040404" FontFamily="MV Boli" FontSize="36" RenderTransformOrigin="0.5,0.5" UndoLimit="103">
+                    <Button x:Name="saveButton" Content="Save" Margin="0,94,328,0" VerticalAlignment="Top" Height="40" Background="LightGray" FontFamily="MV Boli" RenderTransformOrigin="0.5,0.5" Foreground="Black" Click="SaveFileButton_Click" IsEnabled="False" Width="75" HorizontalAlignment="Right" FontSize="16" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
+                    <Button x:Name="openButton" Content="Open" Margin="24,32,0,0" VerticalAlignment="Top" Width="75" Click="openFileButton_Click" Height="42" Background="#FFDDDDDD" Foreground="#FF040404" FontFamily="MV Boli" RenderTransformOrigin="0,0" HorizontalAlignment="Left" FontSize="16"/>
+                    <TextBox x:Name="separatorTextBox" Height="125" Margin="24,200,41,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="TextBox_TextChanged" Background="White" Foreground="#FF040404" FontFamily="MV Boli" FontSize="36" RenderTransformOrigin="0.5,0.5" UndoLimit="103">
                         <!--
         TODO: 18.08.2016
         AGAIN naming convention
@@ -26,13 +26,13 @@
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="106*"/>
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="chooseFilesButton" Content="Choose files" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Width="150" Click="chooseFilesButton_Click" FontSize="24" FontFamily="MV Boli" Grid.Column="1"/>
+                    <Button x:Name="chooseFilesButton" Content="Choose files" HorizontalAlignment="Left" Margin="10,21,0,0" VerticalAlignment="Top" Width="111" Click="chooseFilesButton_Click" FontSize="16" FontFamily="MV Boli" Grid.Column="1"/>
                     <TextBox x:Name="reportTextBox" HorizontalAlignment="Left" Height="162" Margin="10,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsEnabled="False" Grid.Column="1" FontFamily="MV Boli"/>
-                    <Button x:Name="mergeToButton" Content="Merge to" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Width="150" Click="mergeToButton_Click" FontSize="24" FontFamily="MV Boli" Grid.Column="1"/>
-                    <Button x:Name="splitButton" Content="Split" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="150" Click="splitButton_Click" Grid.Column="1" FontFamily="MV Boli" FontSize="24"/>
-                    <TextBox x:Name="linesNumberTextBox" HorizontalAlignment="Left" Height="43" Margin="165,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" ToolTip="Number of lines " Grid.Column="1"/>
-                    <Label x:Name="linesLabel" Content="lines" HorizontalAlignment="Left" Margin="245,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-3.846" Grid.Column="1" FontFamily="MV Boli" Height="42" FontSize="18" Width="56"/>
-                    <Button x:Name="checkDuplicatesButton" Content="Check Duplicates" HorizontalAlignment="Left" Margin="342,21,0,0" VerticalAlignment="Top" Width="100" ToolTip="Create Duplicare Report" Click="checkDuplicatesButton_Click" Grid.Column="1"/>
+                    <Button x:Name="mergeToButton" Content="Merge to" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top" Width="111" Click="mergeToButton_Click" FontSize="16" FontFamily="MV Boli" Grid.Column="1"/>
+                    <Button x:Name="splitButton" Content="Split" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="111" Click="splitButton_Click" Grid.Column="1" FontFamily="MV Boli" FontSize="16"/>
+                    <TextBox x:Name="linesNumberTextBox" HorizontalAlignment="Left" Height="31" Margin="141,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" ToolTip="Number of lines " Grid.Column="1"/>
+                    <Label x:Name="linesLabel" Content="lines" HorizontalAlignment="Left" Margin="221,116,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-3.846" Grid.Column="1" FontFamily="MV Boli" Height="31" FontSize="18" Width="56"/>
+                    <Button x:Name="checkDuplicatesButton" Content="Check Duplicates" HorizontalAlignment="Left" Margin="302,10,0,0" VerticalAlignment="Top" Width="140" ToolTip="Create Duplicare Report" Click="checkDuplicatesButton_Click" Grid.Column="1" FontSize="16" FontFamily="MV Boli"/>
                     <DataGrid Grid.Column="1" HorizontalAlignment="Left" Height="162" Margin="245,181,0,0" VerticalAlignment="Top" Width="197" IsSynchronizedWithCurrentItem="True" Cursor="Arrow"/>
                 </Grid>
             </TabItem>
