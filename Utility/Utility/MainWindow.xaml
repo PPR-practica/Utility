@@ -32,6 +32,7 @@
                     <Button x:Name="splitButton" Content="Split" HorizontalAlignment="Left" Margin="10,117,0,0" VerticalAlignment="Top" Width="150" Click="splitButton_Click" Grid.Column="1" FontFamily="MV Boli" FontSize="24"/>
                     <TextBox x:Name="linesNumberTextBox" HorizontalAlignment="Left" Height="43" Margin="165,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" ToolTip="Number of lines " Grid.Column="1"/>
                     <Label x:Name="linesLabel" Content="lines" HorizontalAlignment="Left" Margin="245,117,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-3.846" Grid.Column="1" FontFamily="MV Boli" Height="42" FontSize="18" Width="56"/>
+                    <Button x:Name="checkDuplicatesButton" Content="Check Duplicates" HorizontalAlignment="Left" Margin="342,21,0,0" VerticalAlignment="Top" Width="100" ToolTip="Create Duplicare Report" Click="checkDuplicatesButton_Click" Grid.Column="1"/>
                     <DataGrid Grid.Column="1" HorizontalAlignment="Left" Height="162" Margin="245,181,0,0" VerticalAlignment="Top" Width="197" IsSynchronizedWithCurrentItem="True" Cursor="Arrow"/>
                 </Grid>
             </TabItem>
