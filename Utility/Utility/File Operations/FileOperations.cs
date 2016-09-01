@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Utility.File_Operations;
-
+using System;
 namespace Utility.Text_Operations
 {
     public static class FileOperations
@@ -52,7 +52,7 @@ namespace Utility.Text_Operations
                         while ((bytesRead = input.Read(buffer, 0, buffer.Length)) > 0)
                         {
                             output.Write(buffer, 0, bytesRead);
-                        }
+                        }                        
                     }
                 }
             }
@@ -90,8 +90,7 @@ namespace Utility.Text_Operations
                 }
                 else
                 {
-                    fileNumber++;
-                    outputFile = directory + "\\" + outputFileName + fileNumber + extension;
+                    fileNumber++;                    
                     File.Create(outputFile).Dispose();
                     fileWriter = new StreamWriter(outputFile);
                     fileWriter.AutoFlush = true;

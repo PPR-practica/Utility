@@ -9,10 +9,7 @@ using Utility.File_Operations.ExcelOperations;
 using System.IO;
 
 namespace Utility
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+{    
     public partial class MainWindow : Window
     {
         string fileText;
@@ -23,8 +20,8 @@ namespace Utility
         public MainWindow()
         {
         }
-
-        private void openButton_Click(object sender, RoutedEventArgs e)
+       
+        private void openFileButton_Click(object sender, RoutedEventArgs e)
         {
             filePath = FileOperations.GetFilePath();
             try
@@ -42,27 +39,27 @@ namespace Utility
         {
         }
 
-        private void Save_Click(object sender, RoutedEventArgs e)
+        private void SaveFileButton_Click(object sender, RoutedEventArgs e)
         {
-            if (textBox1.Text == "")
+            if(separatorTextBox.Text == "")
             {
                 MessageBox.Show("Please input delimiter!", "Error", MessageBoxButton.OK);
             }
             else
             {
-                processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, textBox1.Text.ToCharArray()));
-                FileWriter.SaveToFile(filePath, textBox1.Text, processedText);
-            }
+                processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, separatorTextBox.Text.ToCharArray()));
+                FileWriter.SaveToFile(filePath, separatorTextBox.Text, processedText);
+            }            
         }
 
         private void chooseFilesButton_Click(object sender, RoutedEventArgs e)
         {
-            textBox.Clear();
+            reportTextBox.Clear();
             inputFiles = FileOperations.PickFiles();
             List<string> allText = FileReader.ReadFiles(inputFiles);
             foreach (string file in inputFiles)
             {
-                textBox.AppendText(file + Environment.NewLine);
+                reportTextBox.AppendText(file + "\r\n");
             }
         }
 
