@@ -9,7 +9,7 @@ using Utility.File_Operations.ExcelOperations;
 using System.IO;
 
 namespace Utility
-{    
+{
     public partial class MainWindow : Window
     {
         string fileText;
@@ -20,7 +20,7 @@ namespace Utility
         public MainWindow()
         {
         }
-       
+
         private void openFileButton_Click(object sender, RoutedEventArgs e)
         {
             filePath = FileOperations.GetFilePath();
@@ -41,7 +41,7 @@ namespace Utility
 
         private void SaveFileButton_Click(object sender, RoutedEventArgs e)
         {
-            if(separatorTextBox.Text == "")
+            if (separatorTextBox.Text == "")
             {
                 MessageBox.Show("Please input delimiter!", "Error", MessageBoxButton.OK);
             }
@@ -49,11 +49,15 @@ namespace Utility
             {
                 processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, separatorTextBox.Text.ToCharArray()));
                 FileWriter.SaveToFile(filePath, separatorTextBox.Text, processedText);
-            }            
+            }
         }
 
         private void chooseFilesButton_Click(object sender, RoutedEventArgs e)
         {
+            mergeToButton.IsEnabled = true;
+            splitButton.IsEnabled = true;
+            checkDuplicatesButton.IsEnabled = true;
+
             reportTextBox.Clear();
             inputFiles = FileOperations.PickFiles();
             List<string> allText = FileReader.ReadFiles(inputFiles);
@@ -65,24 +69,8 @@ namespace Utility
 
         private void mergeToButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                int? fileNumber = inputFiles.Length;
-                if (fileNumber != null)
-                {
-                    FileOperations.MergeFiles(inputFiles);
-                    reportTextBox.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
-            }
-
+            FileOperations.MergeFiles(inputFiles);
+            reportTextBox.Clear();
         }
 
         private void splitButton_Click(object sender, RoutedEventArgs e)
@@ -125,7 +113,6 @@ namespace Utility
                                 new ExcelDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
                                 break;
                             }
-
                     }
                 }
                 /// ^ make delegate???
