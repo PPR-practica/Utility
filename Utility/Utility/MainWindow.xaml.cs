@@ -71,7 +71,7 @@ namespace Utility
                 if (fileNumber != null)
                 {
                     FileOperations.MergeFiles(inputFiles);
-                    textBox.Clear();
+                    reportTextBox.Clear();
                 }
                 else
                 {
@@ -112,17 +112,17 @@ namespace Utility
                     {
                         case (".txt"):
                             {
-                                new TXTDuplicateReport().ExecuteReport(textBox, new string[1] { file });
+                                new TXTDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
                                 break;
                             }
                         case (".xls"):
                             {
-                                new ExcelDuplicateReport().ExecuteReport(textBox, new string[1] { file });
+                                new ExcelDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
                                 break;
                             }
                         case (".xlsx"):
                             {
-                                new ExcelDuplicateReport().ExecuteReport(textBox, new string[1] { file });
+                                new ExcelDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
                                 break;
                             }
 
