@@ -32,7 +32,7 @@ namespace Utility
                 fileText = FileReader.ReadFile(filePath);
                 saveButton.IsEnabled = true;
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 // user clicked cancel --->> do nothing
             }
@@ -44,7 +44,7 @@ namespace Utility
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if(textBox1.Text == "")
+            if (textBox1.Text == "")
             {
                 MessageBox.Show("Please input delimiter!", "Error", MessageBoxButton.OK);
             }
@@ -60,7 +60,7 @@ namespace Utility
             textBox.Clear();
             inputFiles = FileOperations.PickFiles();
             List<string> allText = FileReader.ReadFiles(inputFiles);
-            foreach(string file in inputFiles)
+            foreach (string file in inputFiles)
             {
                 textBox.AppendText(file + Environment.NewLine);
             }
@@ -91,35 +91,29 @@ namespace Utility
         private void splitButton_Click(object sender, RoutedEventArgs e)
         {
             int outNumber;
-            if(inputFiles.Length == 0)
+            if (int.TryParse(linesNumberTextBox.Text, out outNumber))
             {
-                MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
+                foreach (string file in inputFiles)
+                {
+                    FileOperations.Split(file, int.Parse(linesNumberTextBox.Text));
+                }
             }
             else
             {
-                if (int.TryParse(linesNumberTextBox.Text, out outNumber))
-                {
-                    foreach (string file in inputFiles)
-                    {
-                        FileOperations.Split(file, int.Parse(linesNumberTextBox.Text));
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please input number of lines!", "Error", MessageBoxButton.OK);
-                }
+                MessageBox.Show("Please input number of lines!", "Error", MessageBoxButton.OK);
             }
+
         }
 
         private void checkDuplicatesButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                foreach(string file in inputFiles)
+                foreach (string file in inputFiles)
                 {
-                    switch(Path.GetExtension(file))
+                    switch (Path.GetExtension(file))
                     {
-                        case(".txt"):
+                        case (".txt"):
                             {
                                 new TXTDuplicateReport().ExecuteReport(textBox, new string[1] { file });
                                 break;
@@ -139,7 +133,7 @@ namespace Utility
                 }
                 /// ^ make delegate???
             }
-            catch(NullReferenceException exception)
+            catch (NullReferenceException exception)
             {
                 MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
             }
