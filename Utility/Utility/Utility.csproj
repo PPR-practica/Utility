@@ -56,7 +56,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="File Operations\DuplicateChecker.cs" />
     <Compile Include="File Operations\ExcelOperations\ExcelDuplicateReport.cs" />
+    <Compile Include="File Operations\ExcelReader.cs" />
     <Compile Include="File Operations\FileOperations.cs" />
     <Compile Include="File Operations\FileReader.cs" />
     <Compile Include="File Operations\FileWriter.cs" />

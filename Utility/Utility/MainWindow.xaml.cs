@@ -4,12 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using Utility.Text_Operations;
 using Utility.File_Operations;
-using Utility.File_Operations.TXTOperations;
-using Utility.File_Operations.ExcelOperations;
-using System.IO;
 
 namespace Utility
-{
+{    
     public partial class MainWindow : Window
     {
         string fileText;
@@ -20,7 +17,7 @@ namespace Utility
         public MainWindow()
         {
         }
-
+       
         private void openFileButton_Click(object sender, RoutedEventArgs e)
         {
             filePath = FileOperations.GetFilePath();
@@ -49,7 +46,7 @@ namespace Utility
             {
                 processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, separatorTextBox.Text.ToCharArray()));
                 FileWriter.SaveToFile(filePath, separatorTextBox.Text, processedText);
-            }
+            }            
         }
 
         private void chooseFilesButton_Click(object sender, RoutedEventArgs e)
@@ -69,9 +66,9 @@ namespace Utility
 
         private void mergeToButton_Click(object sender, RoutedEventArgs e)
         {
-            FileOperations.MergeFiles(inputFiles);
-            reportTextBox.Clear();
-        }
+                    FileOperations.MergeFiles(inputFiles);
+                    reportTextBox.Clear();
+                }
 
         private void splitButton_Click(object sender, RoutedEventArgs e)
         {
@@ -87,54 +84,20 @@ namespace Utility
             {
                 MessageBox.Show("Please input number of lines!", "Error", MessageBoxButton.OK);
             }
-
         }
 
         private void checkDuplicatesButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                foreach (string file in inputFiles)
-                {
-                    switch (Path.GetExtension(file))
-                    {
-                        case (".txt"):
-                            {
-                                new TXTDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
-                                break;
-                            }
-                        case (".xls"):
-                            {
-                                var result = new ExcelDuplicateReport().TableDuplicateReport(file, "Sheet1$").DefaultView;
-                                excelGridView.ItemsSource = result;
-                                excelGridView.DataContext = result;
-                                /*DataGridCheckBoxColumn checkBox = new DataGridCheckBoxColumn()
-                                {
-                                    Header = "check"
-                                };
-                                excelGridView.Columns.Add(checkBox);*/
-                                break;
-                            }
-                        case (".xlsx"):
-                            {
-                                var result = new ExcelDuplicateReport().TableDuplicateReport(file, "Sheet1$").DefaultView;
-                                excelGridView.ItemsSource = result;
-                                excelGridView.DataContext = result;
-                                DataGridCheckBoxColumn checkBox = new DataGridCheckBoxColumn()
-                                {
-                                    Header = "check"
-                                };
-                                excelGridView.Columns.Add(checkBox);
-                                break;
-                            }
-                    }
-                }               
+                DuplicateChecker checker = new DuplicateChecker();
+                checker.Check(reportTextBox, excelGridView, inputFiles);
             }
             catch (NullReferenceException exception) //NullReferenceException
             {
                 MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
             }
-            catch (IndexOutOfRangeException exception)
+            catch(IndexOutOfRangeException exception)
             {
                 // null table/worksheet nothing to show
             }

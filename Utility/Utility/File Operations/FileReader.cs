@@ -14,12 +14,9 @@ namespace Utility.File_Operations
         public static string ReadFile(string filePath)
         {
             string fileText = "";
-
             StreamReader fileReader = new StreamReader(filePath);
             fileText = fileReader.ReadToEnd();
             fileReader.Dispose();
-
-
             return fileText;
         }
 
@@ -31,7 +28,6 @@ namespace Utility.File_Operations
         public static List<string> ReadFiles(string[] files)
         {
             List<string> allText = new List<string>();
-
             for (int i = 0; i < files.Count(); i++)
             {
                 StreamReader fileReader = new StreamReader(files[i]);

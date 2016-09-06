@@ -5,14 +5,14 @@
     <Grid IsManipulationEnabled="True" MinHeight="580" MinWidth="580">
         <DockPanel>
             <TabControl x:Name="tabControl" VerticalContentAlignment="Stretch" MinHeight="540" MinWidth="540" Padding="2" IsManipulationEnabled="True" IsSynchronizedWithCurrentItem="True" HorizontalContentAlignment="Stretch">
-                <TabItem Header="Text">
+            <TabItem Header="Text">
                     <Grid Background="#FFE5E5E5" MinHeight="550" MinWidth="550" ForceCursor="True">
                         <Button x:Name="openButton" Content="Open" Margin="8,32,0,0" VerticalAlignment="Top" Width="120" Height="42" Click="openFileButton_Click" Background="#FFDDDDDD" Foreground="#FF040404" FontFamily="MV Boli" RenderTransformOrigin="0,0" HorizontalAlignment="Left" FontSize="16"/>
                         <Button x:Name="saveButton" Content="Save" Margin="8,79,0,0" VerticalAlignment="Top" Width="120" Height="42"  Click="SaveFileButton_Click" Background="LightGray" Foreground="Black" FontFamily="MV Boli" RenderTransformOrigin="0.5,0.5"  HorizontalAlignment="Left" FontSize="16" IsEnabled="False"  BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}"/>
                         <TextBox x:Name="separatorTextBox" Margin="10,135,10,33" TextWrapping="Wrap" TextChanged="TextBox_TextChanged" Background="White" Foreground="#FF040404" FontFamily="MV Boli" FontSize="30" RenderTransformOrigin="0.5,0.5" UndoLimit="103"  VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Files">
+                </Grid>
+            </TabItem>
+            <TabItem Header="Files">
                     <Grid Background="#FFE5E5E5" MinHeight="550" MinWidth="550" >
                         <Button x:Name="chooseFilesButton" Width="140" Content="Choose files" HorizontalAlignment="Left" Margin="6,10,0,0" VerticalAlignment="Top" Click="chooseFilesButton_Click" FontSize="16" FontFamily="MV Boli" />
                         <Button x:Name="mergeToButton" Width="140" Content="Merge to"  HorizontalAlignment="Left" Margin="6,45,0,0" VerticalAlignment="Top" Click="mergeToButton_Click" FontSize="16" FontFamily="MV Boli"/>
@@ -24,9 +24,9 @@
                         <DataGrid x:Name="excelGridView" Margin="10,154,10,10" IsSynchronizedWithCurrentItem="True" Cursor="Arrow" AreRowDetailsFrozen="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" ClipboardCopyMode="IncludeHeader" CanUserDeleteRows="False" UseLayoutRounding="False"/>
                         <RadioButton x:Name="deleteOnClick" Content="deleteOnClick" HorizontalAlignment="Left" Margin="158,10,0,0" VerticalAlignment="Top"/>
                         <RadioButton x:Name="deleteOnSave" Content="deleteOnSave" HorizontalAlignment="Left" Margin="158,33,0,0" VerticalAlignment="Top"/>
-                    </Grid>
-                </TabItem>
-            </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
         </DockPanel>
     </Grid>
 </Window>
