@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
@@ -51,15 +52,12 @@ namespace Utility.File_Operations.XMLOperations
             return report;
         }
 
-        public void ExecuteReport(TextBox textBox, string[] inputFiles)
+        public void ExecuteReport(dynamic textBox, string inputFile)
         {
             textBox.Clear();
-            foreach (string file in inputFiles)
-            {
-                textBox.AppendText(file + Environment.NewLine);
-                List<string> report = new XMLDuplicareReport().DuplicateReport(file);
-                textBox.AppendText(String.Join(Environment.NewLine, report));
-            }
+            textBox.AppendText(inputFile + Environment.NewLine);
+            List<string> report = new XMLDuplicareReport().DuplicateReport(inputFile);
+            textBox.AppendText(String.Join(Environment.NewLine, report));
         }
     }
 }

@@ -19,21 +19,16 @@ namespace Utility.File_Operations
             if (dialogResult == true)
             {
                 filePath = saveFileDialog.FileName;
-                //File.WriteAllLines(filePath, text);
-
-                StreamWriter streamWriter = File.AppendText(filePath);
+                StreamWriter streamWriter = new StreamWriter(filePath, false);
                 foreach (string line in text)
                 {
                     streamWriter.Write(line + delimiter);
                 }
                 streamWriter.Dispose();
-
             }
             else
             {
-                //File.WriteAllLines(filePath, text);
-
-                StreamWriter streamWriter = File.AppendText(filePath);
+                StreamWriter streamWriter = new StreamWriter(filePath, false);
                 foreach (string line in text)
                 {
                     streamWriter.Write(line + delimiter);

@@ -4,9 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using Utility.Text_Operations;
 using Utility.File_Operations;
-using Utility.File_Operations.TXTOperations;
-using Utility.File_Operations.ExcelOperations;
-using System.IO;
 
 namespace Utility
 {
@@ -87,39 +84,22 @@ namespace Utility
             {
                 MessageBox.Show("Please input number of lines!", "Error", MessageBoxButton.OK);
             }
-
         }
 
         private void checkDuplicatesButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                foreach (string file in inputFiles)
-                {
-                    switch (Path.GetExtension(file))
-                    {
-                        case (".txt"):
-                            {
-                                new TXTDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
-                                break;
-                            }
-                        case (".xls"):
-                            {
-                                new ExcelDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
-                                break;
-                            }
-                        case (".xlsx"):
-                            {
-                                new ExcelDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
-                                break;
-                            }
-                    }
-                }
-                /// ^ make delegate???
+                DuplicateChecker checker = new DuplicateChecker();
+                checker.Check(reportTextBox, excelGridView, inputFiles);
             }
             catch (NullReferenceException exception)
             {
                 MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
+            }
+            catch(IndexOutOfRangeException exception)
+            {
+                // null table/worksheet nothing to show
             }
         }
     }
