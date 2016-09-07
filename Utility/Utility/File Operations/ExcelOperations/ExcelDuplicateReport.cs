@@ -96,6 +96,9 @@ namespace Utility.File_Operations.ExcelOperations
                 rowsList.Add(row.ItemArray);
             }
 
+
+
+
             // iterate over rowsList and get duplicates
             for (int i = 0; i < rowsList.Count(); i++)
             {
