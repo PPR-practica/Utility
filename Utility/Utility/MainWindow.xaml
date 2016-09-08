@@ -21,7 +21,11 @@
                         <TextBox x:Name="reportTextBox" Margin="318,10,10,0" TextWrapping="Wrap" TextChanged="reportTextBox_TextChanged" IsEnabled="False" Foreground="#FF040404" FontFamily="MV Boli" FontSize="18" RenderTransformOrigin="0.5,0.5" UndoLimit="103"  VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Height="139" VerticalAlignment="Top"/>
                         <TextBox x:Name="linesNumberTextBox" HorizontalAlignment="Left" Height="31" Margin="158,79,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="108" ToolTip="Number of lines " FontFamily="MV Boli" FontSize="16"/>
                         <Label x:Name="linesLabel" Content="lines" HorizontalAlignment="Left" Margin="271,79,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.263,-3.846" FontFamily="MV Boli" Height="30" FontSize="16" Width="42"/>
-                        <DataGrid x:Name="excelGridView" Margin="10,154,10,10" IsSynchronizedWithCurrentItem="True" Cursor="Arrow" AreRowDetailsFrozen="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" ClipboardCopyMode="IncludeHeader" CanUserDeleteRows="False" UseLayoutRounding="False"/>
+                        <DataGrid x:Name="excelGridView" Margin="10,154,10,10" IsSynchronizedWithCurrentItem="True" Cursor="Arrow" AreRowDetailsFrozen="True" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" ClipboardCopyMode="IncludeHeader" CanUserDeleteRows="False" UseLayoutRounding="False" SelectionChanged="excelGridView_SelectionChanged_1">
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn x:Name="checkBox" Binding="{x:Null}" ClipboardContentBinding="{x:Null}" Header="check" Visibility="Hidden"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
                         <RadioButton x:Name="deleteOnClick" Content="deleteOnClick" HorizontalAlignment="Left" Margin="158,10,0,0" VerticalAlignment="Top"/>
                         <RadioButton x:Name="deleteOnSave" Content="deleteOnSave" HorizontalAlignment="Left" Margin="158,33,0,0" VerticalAlignment="Top"/>
                 </Grid>

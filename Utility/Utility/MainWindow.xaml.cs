@@ -117,5 +117,10 @@ namespace Utility
         {
 
         }
+
+        private void excelGridView_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
