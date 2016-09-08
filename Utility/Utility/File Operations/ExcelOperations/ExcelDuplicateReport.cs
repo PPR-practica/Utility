@@ -33,7 +33,6 @@ namespace Utility.File_Operations.ExcelOperations
             List<string> report = new List<string>(); // toate liniile (in afara de prima fmm)
             Dictionary<object[], string> duplicates = new Dictionary<object[], string>();
 
-<<<<<<< HEAD
             // get first row of table and add it to rowsList
             object[] firstRow = new object[3];
             for (int columnItemIndex = 0; columnItemIndex < table.Columns.Count; columnItemIndex++)
@@ -43,45 +42,38 @@ namespace Utility.File_Operations.ExcelOperations
             rowsList.Add(firstRow);
 
             // add the remaining rows to rowsList
-=======
->>>>>>> parent of 756b508... stuff
             foreach (DataRow row in table.Rows)
             {
                 rowsList.Add(row.ItemArray);
             }
 
+            // iterate over rowsList and get duplicates
             for (int i = 0; i < rowsList.Count(); i++)
             {
                 if (!duplicates.Keys.Any(x => x.SequenceEqual(rowsList.ElementAt(i))))
                 {
-                    duplicates.Add(rowsList.ElementAt(i), (i + 2).ToString());
+                    duplicates.Add(rowsList.ElementAt(i), (i + 1).ToString());
                 }
                 else
                 {
                     if (!rowsList.ElementAt(i).Equals(null))
                     {
-                        duplicates[(duplicates.Keys.Where(x => x.SequenceEqual(rowsList.ElementAt(i)))).ElementAt(0)] = duplicates[(object[])(duplicates.Keys.Where(x => x.SequenceEqual(rowsList.ElementAt(i)))).ElementAt(0)] + ", " + (i + 2);
+                        duplicates[(duplicates.Keys.Where(x => x.SequenceEqual(rowsList.ElementAt(i)))).ElementAt(0)] = duplicates[(object[])(duplicates.Keys.Where(x => x.SequenceEqual(rowsList.ElementAt(i)))).ElementAt(0)] + ", " + (i + 1);
                     }
                 }
             }
 
-<<<<<<< HEAD
             // create duplicate report
-=======
->>>>>>> parent of 756b508... stuff
             foreach (object[] duplicateObject in duplicates.Keys)
             {
                 if (duplicates[duplicateObject].Contains(","))
                 {
-<<<<<<< HEAD
                     report.Add(String.Format("{0} = apare de {1} ori pe randurile {2}", String.Join(" | ", duplicateObject.Select(o => o.ToString())), duplicates[duplicateObject].Split(",".ToCharArray()).Count(), duplicates[duplicateObject]));
                 }
             }
-=======
-                    report.Add(String.Format("{0} = apare de {1} ori pe randurile {2}", String.Join("|", duplicateObject.Select(o => o.ToString())), duplicates[duplicateObject].Split(",".ToCharArray()).Count(), duplicates[duplicateObject]));
-                }
->>>>>>> parent of 756b508... stuff
             }
+
+    */
             return report;
         }
 
@@ -143,40 +135,33 @@ namespace Utility.File_Operations.ExcelOperations
         public void ExecuteReport(TextBox textBox, string[] inputFiles)
 >>>>>>> parent of 756b508... stuff
         {
-            DataTable table = excelReader.ReadExcelFile(sheetName, file);
+            DataTable table = ReadExcelFile(sheetName, file);
             List<object[]> rowsList = new List<object[]>();
             List<string> report = new List<string>(); // toate liniile (in afara de prima fmm)
             Dictionary<object[], string> duplicates = new Dictionary<object[], string>();
-            
+
             // get first row of table and add it to rowsList
             object[] firstRow = new object[3];
             for (int columnItemIndex = 0; columnItemIndex < table.Columns.Count; columnItemIndex++)
             {
-<<<<<<< HEAD
                 firstRow[columnItemIndex] = table.Columns[columnItemIndex].ToString();
-=======
-                foreach (string sheet in GetExcelSheetNames(file))
-                {
-                    textBox.AppendText(Environment.NewLine + file + Environment.NewLine);
-                    textBox.AppendText("WorkSheet: " + sheet.TrimEnd('$') + Environment.NewLine);
-                    List<string> report = excelReport.DuplicateReport(file, sheet);
-                    textBox.AppendText(String.Join(Environment.NewLine, report));
->>>>>>> parent of 756b508... stuff
-                }
+            }
             rowsList.Add(firstRow);
 
             // add the remaining rows to rowsList
             foreach (DataRow row in table.Rows)
-        {
+            {
                 rowsList.Add(row.ItemArray);
             }
+
+
+
 
             // iterate over rowsList and get duplicates
             for (int i = 0; i < rowsList.Count(); i++)
             {
                 if (!duplicates.Keys.Any(x => x.SequenceEqual(rowsList.ElementAt(i))))
                 {
-<<<<<<< HEAD
                     duplicates.Add(rowsList.ElementAt(i), (i + 1).ToString());
                 }
                 else
@@ -209,29 +194,71 @@ namespace Utility.File_Operations.ExcelOperations
                     foreach (Match duplicateMatch in digitRegex.Matches(duplicates[duplicateRow]))
 =======
                 String connString = "Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + excelFile + ";Extended Properties=Excel 8.0;";
+            
+            DataTable reportTable = new DataTable("DuplicateReport");
+            reportTable.Columns.Add("Value");
+            reportTable.Columns.Add("Line");
+            reportTable.Columns.AddRange(new DataColumn[duplicates.Keys.Count + 2]); // 1 extra cell for line number and other extra cell for checkbox 
 
-                objConn = new OleDbConnection(connString);
-                objConn.Open();
-                dt = objConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+        /// <summary>
+        /// Create duplicate report as table
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public DataTable TableDuplicateReport(string file, string sheetName)
+        {
+            DataTable table = excelReader.ReadExcelFile(sheetName, file);
+            List<object[]> rowsList = new List<object[]>();
+            List<string> report = new List<string>(); // toate liniile (in afara de prima fmm)
+            Dictionary<object[], string> duplicates = new Dictionary<object[], string>();
+            
+            // get first row of table and add it to rowsList
+            object[] firstRow = new object[3];
+            for (int columnItemIndex = 0; columnItemIndex < table.Columns.Count; columnItemIndex++)
+            {
+                firstRow[columnItemIndex] = table.Columns[columnItemIndex].ToString();
+                }
+            rowsList.Add(firstRow);
 
-                if (dt == null)
->>>>>>> parent of 756b508... stuff
+            // add the remaining rows to rowsList
+            foreach (DataRow row in table.Rows)
+        {
+                rowsList.Add(row.ItemArray);
+            }
+
+            // iterate over rowsList and get duplicates
+            for (int i = 0; i < rowsList.Count(); i++)
+            {
+                if (!duplicates.Keys.Any(x => x.SequenceEqual(rowsList.ElementAt(i))))
+                {
+                    duplicates.Add(rowsList.ElementAt(i), (i + 1).ToString());
+                }
+                else
+                {
+                    if (!rowsList.ElementAt(i).Equals(null))
+                    {
+                        duplicates[(duplicates.Keys.Where(x => x.SequenceEqual(rowsList.ElementAt(i)))).ElementAt(0)] = duplicates[(object[])(duplicates.Keys.Where(x => x.SequenceEqual(rowsList.ElementAt(i)))).ElementAt(0)] + ", " + (i + 1);
+                }
+            }
+        }
+            DataTable reportTable = new DataTable("DuplicateReport");
+            reportTable.Columns.Add("Line");
+            reportTable.Columns.Add("Value");
+            reportTable.Columns.AddRange(new DataColumn[duplicates.Keys.Count + 2]); // 1 extra cell for line number and other extra cell for checkbox 
+
+            //create duplicate report as table
+            foreach (object[] duplicateRow in duplicates.Keys)
+            {
+                if (duplicates[duplicateRow].Contains(","))
+                {
+                    Regex digitRegex = new Regex(@"([\d]+)");
+                    foreach (Match duplicateMatch in digitRegex.Matches(duplicates[duplicateRow]))
                 {
                         //add row to results table
                         // match | duplicateText | checkbox
                         reportTable.Rows.Add(duplicateMatch.Value, String.Join(" | ", duplicateRow));
                 }
                 }
-<<<<<<< HEAD
-=======
-
-                for (int sheetsNumber = 0; sheetsNumber < excelSheets.Length; sheetsNumber++)
-                {
-                    // pun aici dupcheck pt fiecare
-                }
-
-                return excelSheets;
->>>>>>> parent of 756b508... stuff
             }
             return reportTable;
             }

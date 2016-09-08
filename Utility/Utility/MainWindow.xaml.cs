@@ -51,6 +51,10 @@ namespace Utility
 
         private void chooseFilesButton_Click(object sender, RoutedEventArgs e)
         {
+            mergeToButton.IsEnabled = true;
+            splitButton.IsEnabled = true;
+            checkDuplicatesButton.IsEnabled = true;
+
             reportTextBox.Clear();
             inputFiles = FileOperations.PickFiles();
             List<string> allText = FileReader.ReadFiles(inputFiles);
@@ -62,31 +66,9 @@ namespace Utility
 
         private void mergeToButton_Click(object sender, RoutedEventArgs e)
         {
-<<<<<<< HEAD
                     FileOperations.MergeFiles(inputFiles);
                     reportTextBox.Clear();
                 }
-=======
-            try
-            {
-                int? fileNumber = inputFiles.Length;
-                if (fileNumber != null)
-                {
-                    FileOperations.MergeFiles(inputFiles);
-                    reportTextBox.Clear();
-                }
-                else
-                {
-                    MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
-            }
-
-        }
->>>>>>> parent of 756b508... stuff
 
         private void splitButton_Click(object sender, RoutedEventArgs e)
         {
@@ -108,40 +90,13 @@ namespace Utility
         {
             try
             {
-<<<<<<< HEAD
                 DuplicateChecker checker = new DuplicateChecker();
                 checker.Check(reportTextBox, excelGridView, inputFiles);
-=======
-                foreach (string file in inputFiles)
-                {
-                    switch (Path.GetExtension(file))
-                    {
-                        case (".txt"):
-                            {
-                                new TXTDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
-                                break;
-                            }
-                        case (".xls"):
-                            {
-                                new ExcelDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
-                                break;
-                            }
-                        case (".xlsx"):
-                            {
-                                new ExcelDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
-                                break;
-                            }
-
-                    }
-                }
-                /// ^ make delegate???
->>>>>>> parent of 756b508... stuff
             }
-            catch (NullReferenceException exception)
+            catch (NullReferenceException exception) //NullReferenceException
             {
                 MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
             }
-<<<<<<< HEAD
             catch(IndexOutOfRangeException exception)
             {
                 // null table/worksheet nothing to show
@@ -161,8 +116,6 @@ namespace Utility
         private void excelGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-=======
->>>>>>> parent of 756b508... stuff
         }
     }
 }
