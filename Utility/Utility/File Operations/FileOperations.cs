@@ -1,10 +1,7 @@
 ﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Utility.File_Operations;
-using System;
+
 namespace Utility.Text_Operations
 {
     public static class FileOperations
@@ -16,6 +13,7 @@ namespace Utility.Text_Operations
         public static string GetFilePath()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Text or excel files (*.txt / *.xls / *.xlsx) |*.txt;*.xls;*.xlsx";
             openFileDialog.ShowDialog();
             return openFileDialog.FileName;
         }
@@ -27,6 +25,7 @@ namespace Utility.Text_Operations
         public static string[] PickFiles()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Text or excel files (*.txt / *.xls / *.xlsx)|*.txt;*.xls;*.xlsx";
             openFileDialog.Multiselect = true;
             bool? dialogResult = openFileDialog.ShowDialog();
             return openFileDialog.FileNames;

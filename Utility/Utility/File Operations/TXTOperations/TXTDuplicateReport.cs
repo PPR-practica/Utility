@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace Utility.File_Operations.TXTOperations
 {
@@ -52,16 +48,13 @@ namespace Utility.File_Operations.TXTOperations
         /// Execute DuplicateReport for the given files and show the report in textbox
         /// </summary>
         /// <param name="textBox"></param>
-        /// <param name="inputFiles"></param>
-        public void ExecuteReport(TextBox textBox, string[] inputFiles)
+        /// <param name="inputFile"></param>
+        public void ExecuteReport(dynamic textBox, string inputFile)
         {
             textBox.Clear();
-            foreach (string file in inputFiles)
-            {
-                textBox.AppendText(file + Environment.NewLine);
-                List<string> report = new TXTDuplicateReport().DuplicateReport(file);
-                textBox.AppendText(String.Join(Environment.NewLine, report));
-            }
+            textBox.AppendText(inputFile + Environment.NewLine);
+            List<string> report = new TXTDuplicateReport().DuplicateReport(inputFile);
+            textBox.AppendText(String.Join(Environment.NewLine, report));
         }
     }
 }

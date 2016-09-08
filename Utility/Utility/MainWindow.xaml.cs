@@ -4,12 +4,9 @@ using System.Windows;
 using System.Windows.Controls;
 using Utility.Text_Operations;
 using Utility.File_Operations;
-using Utility.File_Operations.TXTOperations;
-using Utility.File_Operations.ExcelOperations;
-using System.IO;
 
 namespace Utility
-{
+{    
     public partial class MainWindow : Window
     {
         string fileText;
@@ -20,7 +17,7 @@ namespace Utility
         public MainWindow()
         {
         }
-
+       
         private void openFileButton_Click(object sender, RoutedEventArgs e)
         {
             filePath = FileOperations.GetFilePath();
@@ -41,7 +38,7 @@ namespace Utility
 
         private void SaveFileButton_Click(object sender, RoutedEventArgs e)
         {
-            if (separatorTextBox.Text == "")
+            if(separatorTextBox.Text == "")
             {
                 MessageBox.Show("Please input delimiter!", "Error", MessageBoxButton.OK);
             }
@@ -49,15 +46,11 @@ namespace Utility
             {
                 processedText = TextOperations.Uniquify(TextOperations.SplitToList(fileText, separatorTextBox.Text.ToCharArray()));
                 FileWriter.SaveToFile(filePath, separatorTextBox.Text, processedText);
-            }
+            }            
         }
 
         private void chooseFilesButton_Click(object sender, RoutedEventArgs e)
         {
-            mergeToButton.IsEnabled = true;
-            splitButton.IsEnabled = true;
-            checkDuplicatesButton.IsEnabled = true;
-
             reportTextBox.Clear();
             inputFiles = FileOperations.PickFiles();
             List<string> allText = FileReader.ReadFiles(inputFiles);
@@ -69,9 +62,31 @@ namespace Utility
 
         private void mergeToButton_Click(object sender, RoutedEventArgs e)
         {
-            FileOperations.MergeFiles(inputFiles);
-            reportTextBox.Clear();
+<<<<<<< HEAD
+                    FileOperations.MergeFiles(inputFiles);
+                    reportTextBox.Clear();
+                }
+=======
+            try
+            {
+                int? fileNumber = inputFiles.Length;
+                if (fileNumber != null)
+                {
+                    FileOperations.MergeFiles(inputFiles);
+                    reportTextBox.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
+            }
+
         }
+>>>>>>> parent of 756b508... stuff
 
         private void splitButton_Click(object sender, RoutedEventArgs e)
         {
@@ -87,13 +102,16 @@ namespace Utility
             {
                 MessageBox.Show("Please input number of lines!", "Error", MessageBoxButton.OK);
             }
-
         }
 
         private void checkDuplicatesButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+<<<<<<< HEAD
+                DuplicateChecker checker = new DuplicateChecker();
+                checker.Check(reportTextBox, excelGridView, inputFiles);
+=======
                 foreach (string file in inputFiles)
                 {
                     switch (Path.GetExtension(file))
@@ -113,14 +131,38 @@ namespace Utility
                                 new ExcelDuplicateReport().ExecuteReport(reportTextBox, new string[1] { file });
                                 break;
                             }
+
                     }
                 }
                 /// ^ make delegate???
+>>>>>>> parent of 756b508... stuff
             }
             catch (NullReferenceException exception)
             {
                 MessageBox.Show("Please choose file(s)!", "Error", MessageBoxButton.OK);
             }
+<<<<<<< HEAD
+            catch(IndexOutOfRangeException exception)
+            {
+                // null table/worksheet nothing to show
+            }
+        }
+
+        private void reportTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void tabControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+        }
+
+        private void excelGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+=======
+>>>>>>> parent of 756b508... stuff
         }
     }
 }

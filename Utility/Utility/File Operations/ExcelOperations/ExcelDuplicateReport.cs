@@ -1,23 +1,26 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
-using System.IO;
 using System.Linq;
+<<<<<<< HEAD
+using System.Text.RegularExpressions;
+=======
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+>>>>>>> parent of 756b508... stuff
 
 namespace Utility.File_Operations.ExcelOperations
 {
     public class ExcelDuplicateReport : Interfaces.IDuplicateReport
     {
+        ExcelReader excelReader = new ExcelReader();
         public List<string> DuplicateReport(string file)
         {
             throw new NotImplementedException();
         }
+
         /// <summary>
         /// Create duplicate report as string list
         /// </summary>
@@ -25,11 +28,23 @@ namespace Utility.File_Operations.ExcelOperations
         /// <returns></returns>
         public List<string> DuplicateReport(string file, string sheetName)
         {
-            DataTable table = ReadExcelFile(sheetName, file);
+            DataTable table = excelReader.ReadExcelFile(sheetName, file);
             List<object[]> rowsList = new List<object[]>();
             List<string> report = new List<string>(); // toate liniile (in afara de prima fmm)
             Dictionary<object[], string> duplicates = new Dictionary<object[], string>();
 
+<<<<<<< HEAD
+            // get first row of table and add it to rowsList
+            object[] firstRow = new object[3];
+            for (int columnItemIndex = 0; columnItemIndex < table.Columns.Count; columnItemIndex++)
+            {
+                firstRow[columnItemIndex] = table.Columns[columnItemIndex].ToString();
+            }
+            rowsList.Add(firstRow);
+
+            // add the remaining rows to rowsList
+=======
+>>>>>>> parent of 756b508... stuff
             foreach (DataRow row in table.Rows)
             {
                 rowsList.Add(row.ItemArray);
@@ -50,77 +65,149 @@ namespace Utility.File_Operations.ExcelOperations
                 }
             }
 
+<<<<<<< HEAD
+            // create duplicate report
+=======
+>>>>>>> parent of 756b508... stuff
             foreach (object[] duplicateObject in duplicates.Keys)
             {
                 if (duplicates[duplicateObject].Contains(","))
                 {
+<<<<<<< HEAD
+                    report.Add(String.Format("{0} = apare de {1} ori pe randurile {2}", String.Join(" | ", duplicateObject.Select(o => o.ToString())), duplicates[duplicateObject].Split(",".ToCharArray()).Count(), duplicates[duplicateObject]));
+                }
+            }
+=======
                     report.Add(String.Format("{0} = apare de {1} ori pe randurile {2}", String.Join("|", duplicateObject.Select(o => o.ToString())), duplicates[duplicateObject].Split(",".ToCharArray()).Count(), duplicates[duplicateObject]));
                 }
+>>>>>>> parent of 756b508... stuff
             }
             return report;
         }
 
-        public void ExecuteReport(TextBox textBox, string[] inputFiles)
+<<<<<<< HEAD
+        /// <summary>
+        /// Create duplicate report as string list
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public DataTable TableDuplicateReport(string file, string sheetName)
         {
-            textBox.Clear();
-            var excelReport = new ExcelDuplicateReport();
-            
-            foreach (string file in inputFiles)
+            DataTable table = ReadExcelFile(sheetName, file);
+            List<object[]> rowsList = new List<object[]>();
+            List<string> report = new List<string>(); // toate liniile (in afara de prima fmm)
+            Dictionary<object[], string> duplicates = new Dictionary<object[], string>();
+
+            // get first row of table and add it to rowsList
+            object[] firstRow = new object[3];
+            for (int columnItemIndex = 0; columnItemIndex < table.Columns.Count; columnItemIndex++)
             {
+                firstRow[columnItemIndex] = table.Columns[columnItemIndex].ToString();
+            }
+            rowsList.Add(firstRow);
+
+            // add the remaining rows to rowsList
+            foreach (DataRow row in table.Rows)
+            {
+                rowsList.Add(row.ItemArray);
+            }
+
+            // iterate over rowsList and get duplicates
+            for (int i = 0; i < rowsList.Count(); i++)
+            {
+                if (!duplicates.Keys.Any(x => x.SequenceEqual(rowsList.ElementAt(i))))
+                {
+                    duplicates.Add(rowsList.ElementAt(i), (i + 1).ToString());
+                }
+                else
+                {
+                    if (!rowsList.ElementAt(i).Equals(null))
+                    {
+                        duplicates[(duplicates.Keys.Where(x => x.SequenceEqual(rowsList.ElementAt(i)))).ElementAt(0)] = duplicates[(object[])(duplicates.Keys.Where(x => x.SequenceEqual(rowsList.ElementAt(i)))).ElementAt(0)] + ", " + (i + 1);
+                    }
+                }
+            }
+            
+            DataTable reportTable = new DataTable("DuplicateReport");
+            reportTable.Columns.Add("Value");
+            reportTable.Columns.Add("Line");
+            reportTable.Columns.AddRange(new DataColumn[duplicates.Keys.Count + 2]); // 1 extra cell for line number and other extra cell for checkbox 
+
+        /// <summary>
+        /// Create duplicate report as table
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        public DataTable TableDuplicateReport(string file, string sheetName)
+=======
+        public void ExecuteReport(TextBox textBox, string[] inputFiles)
+>>>>>>> parent of 756b508... stuff
+        {
+            DataTable table = excelReader.ReadExcelFile(sheetName, file);
+            List<object[]> rowsList = new List<object[]>();
+            List<string> report = new List<string>(); // toate liniile (in afara de prima fmm)
+            Dictionary<object[], string> duplicates = new Dictionary<object[], string>();
+            
+            // get first row of table and add it to rowsList
+            object[] firstRow = new object[3];
+            for (int columnItemIndex = 0; columnItemIndex < table.Columns.Count; columnItemIndex++)
+            {
+<<<<<<< HEAD
+                firstRow[columnItemIndex] = table.Columns[columnItemIndex].ToString();
+=======
                 foreach (string sheet in GetExcelSheetNames(file))
                 {
                     textBox.AppendText(Environment.NewLine + file + Environment.NewLine);
                     textBox.AppendText("WorkSheet: " + sheet.TrimEnd('$') + Environment.NewLine);
                     List<string> report = excelReport.DuplicateReport(file, sheet);
                     textBox.AppendText(String.Join(Environment.NewLine, report));
+>>>>>>> parent of 756b508... stuff
                 }
-            }
-        }
+            rowsList.Add(firstRow);
 
-        private DataTable ReadExcelFile(string sheetName, string path)
+            // add the remaining rows to rowsList
+            foreach (DataRow row in table.Rows)
         {
+                rowsList.Add(row.ItemArray);
+            }
 
-            using (OleDbConnection conn = new OleDbConnection())
+            // iterate over rowsList and get duplicates
+            for (int i = 0; i < rowsList.Count(); i++)
             {
-                DataTable dt = new DataTable();
-                string Import_FileName = path;
-                string fileExtension = Path.GetExtension(Import_FileName);
-                if (fileExtension == ".xls")
-                    conn.ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 8.0;HDR=YES;'";
-                if (fileExtension == ".xlsx")
-                    conn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Import_FileName + ";" + "Extended Properties='Excel 12.0 Xml;HDR=YES;'";
-                using (OleDbCommand comm = new OleDbCommand())
+                if (!duplicates.Keys.Any(x => x.SequenceEqual(rowsList.ElementAt(i))))
                 {
+<<<<<<< HEAD
+                    duplicates.Add(rowsList.ElementAt(i), (i + 1).ToString());
+                }
+                else
+                {
+                    if (!rowsList.ElementAt(i).Equals(null))
+=======
                     sheetName = sheetName;
                     comm.CommandText = "Select * from [" + sheetName + "]";
                     comm.Connection = conn;
 
                     using (OleDbDataAdapter da = new OleDbDataAdapter())
+>>>>>>> parent of 756b508... stuff
                     {
-                        da.SelectCommand = comm;
-                        da.Fill(dt);
-                        dt.Columns[0].ToString();
-                        dt.Rows[0].ToString();
-
-                        return dt;
-                    }
+                        duplicates[(duplicates.Keys.Where(x => x.SequenceEqual(rowsList.ElementAt(i)))).ElementAt(0)] = duplicates[(object[])(duplicates.Keys.Where(x => x.SequenceEqual(rowsList.ElementAt(i)))).ElementAt(0)] + ", " + (i + 1);
                 }
             }
         }
+            DataTable reportTable = new DataTable("DuplicateReport");
+            reportTable.Columns.Add("Line");
+            reportTable.Columns.Add("Value");
+            reportTable.Columns.AddRange(new DataColumn[duplicates.Keys.Count + 2]); // 1 extra cell for line number and other extra cell for checkbox 
 
-        /// <summary>
-        /// This method retrieves the excel sheet names from 
-        /// an excel workbook.
-        /// </summary>
-        /// <param name="excelFile">The excel file.</param>
-        /// <returns>String[]</returns>
-        private String[] GetExcelSheetNames(string excelFile)
-        {
-            OleDbConnection objConn = null;
-            System.Data.DataTable dt = null;
-
-            try
+            //create duplicate report as table
+            foreach (object[] duplicateRow in duplicates.Keys)
             {
+<<<<<<< HEAD
+                if (duplicates[duplicateRow].Contains(","))
+                {
+                    Regex digitRegex = new Regex(@"([\d]+)");
+                    foreach (Match duplicateMatch in digitRegex.Matches(duplicates[duplicateRow]))
+=======
                 String connString = "Provider=Microsoft.Jet.OLEDB.4.0;" + "Data Source=" + excelFile + ";Extended Properties=Excel 8.0;";
 
                 objConn = new OleDbConnection(connString);
@@ -128,18 +215,15 @@ namespace Utility.File_Operations.ExcelOperations
                 dt = objConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
 
                 if (dt == null)
+>>>>>>> parent of 756b508... stuff
                 {
-                    return null;
+                        //add row to results table
+                        // match | duplicateText | checkbox
+                        reportTable.Rows.Add(duplicateMatch.Value, String.Join(" | ", duplicateRow));
                 }
-
-                String[] excelSheets = new String[dt.Rows.Count];
-                int i = 0;
-
-                foreach (DataRow row in dt.Rows)
-                {
-                    excelSheets[i] = row["TABLE_NAME"].ToString();
-                    i++;
                 }
+<<<<<<< HEAD
+=======
 
                 for (int sheetsNumber = 0; sheetsNumber < excelSheets.Length; sheetsNumber++)
                 {
@@ -147,22 +231,21 @@ namespace Utility.File_Operations.ExcelOperations
                 }
 
                 return excelSheets;
+>>>>>>> parent of 756b508... stuff
             }
-            catch (Exception ex)
-            {
-                return null;
+            return reportTable;
             }
-            finally
-            {
-                if (objConn != null)
+
+        public void ExecuteReport(dynamic excelGridView, string inputFile)
                 {
-                    objConn.Close();
-                    objConn.Dispose();
-                }
-                if (dt != null)
+            var excelReport = new ExcelDuplicateReport();
+            foreach (string sheet in excelReader.GetExcelSheetNames(inputFile))
                 {
-                    dt.Dispose();
-                }
+                DataTable report = excelReport.TableDuplicateReport(inputFile, sheet);
+                excelGridView.ItemsSource = report.DefaultView;
+                excelGridView.DataContext = report.DefaultView;
+
+                // will overwrite previous sheet report ^^^^^^^^^^^^^^^^^^^
             }
         }
     }
